@@ -14,3 +14,8 @@ class ApplicationResponse(BaseModel):
 class CreateApplicationDTO(BaseModel):
     name: str
     url: str
+
+
+class Informations(BaseModel):
+    name: str
+    version: str
