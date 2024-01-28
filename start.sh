@@ -1,2 +1,2 @@
 #!/bin/bash
-uvicorn main:app --reload
+cd src && uvicorn main:app --reload
