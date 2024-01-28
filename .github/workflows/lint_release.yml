@@ -1,6 +1,9 @@
 name: Lint et Release
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -49,6 +52,10 @@ jobs:
       - name: Capture version number
         id: capture_version
         run: echo "::set-output name=version::$(cat app/_version.py | cut -d "'" -f 2)"
+
+      - name: Build de l'image Docker
+        run: |
+          docker build -t gateway:latest -t gateway:${{ github.sha }} -t gateway:${{ steps.capture_version.outputs.version }}  .
 
       - name: Envoyer une notification à Slack
         uses: act10ns/slack@v1
